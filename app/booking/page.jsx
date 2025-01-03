@@ -20,7 +20,9 @@ const BookingForm = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/bookings");
+      const response = await axios.get(
+        "https://hotel-management-backend-mu2u.onrender.com/api/bookings"
+      );
       setBookings(response.data.bookings);
       setAvailableSlots(response.data.availableSlots);
     } catch (error) {
@@ -32,7 +34,7 @@ const BookingForm = () => {
     try {
       const bookingData = { ...data, time: selectedSlot };
       const response = await axios.post(
-        "http://localhost:8080/api/bookings",
+        "https://hotel-management-backend-mu2u.onrender.com/api/bookings",
         bookingData
       );
       if (response.status === 201) {
@@ -49,10 +51,13 @@ const BookingForm = () => {
   };
   const deleteBooking = async (id) => {
     try {
-      const response = await axios.post("http://localhost:8080/api/bookings", {
-        _id: id,
-        action: "delete",
-      });
+      const response = await axios.post(
+        "https://hotel-management-backend-mu2u.onrender.com/api/bookings",
+        {
+          _id: id,
+          action: "delete",
+        }
+      );
       if (response.status === 200) {
         fetchBookings();
         toast.error("Booking Deleted!");
